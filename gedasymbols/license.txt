@@ -1,0 +1,1 @@
+Files in this folder, excepting copyright license files, were originally obtained from gedasymbols.org under a 'GPL license', presumably GPLv2 and above (as gEDA is licensed). They, and all modifications to them, retain that license, which is provided with them, unless a different license is noted in their file.

@@ -1,0 +1,30 @@
+Copyright (C) 2012 mirage335
+See the end of the file for license conditions.
+
+Important: Execute gschem and pcb from this folder when opening files. Otherwise, custom symbols and footprints will not be found.
+
+Use the command "gsch2pcb project" to generate the pcb files from schematics. Where "project" is "ActiveElectrode", "Amplifier", or "Host".
+
+Bill of Materials can be generated in HTML format with genBOM script.
+
+Bulk copper should be grounded. Otherwise, the extra copper will float, degrading noise rejection and phase margins.
+
+Components with "X" at the front of their description make the circuit slightly more robust, and may be excluded. However, circuit boards should be manufactured with room for them, should they prove necessary.
+
+LibreOffice Calc (spreadsheet) can take an HTML copy/pasted from a web browser. From there, prices can be added after stripping extraneous description information with the following regex: \ [^0-9].*
+
+__Copyright__
+This file is part of Mirage335BiosignalAmp.
+
+Mirage335BiosignalAmp is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Mirage335BiosignalAmp is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mirage335BiosignalAmp.  If not, see <http://www.gnu.org/licenses/>.

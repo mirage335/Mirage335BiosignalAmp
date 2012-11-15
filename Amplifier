@@ -1,0 +1,5 @@
+elements-dir ./gedasymbols/footprints
+elements-dir ./customParts/footprints
+
+schematics Amplifier.sch 
+output-name Amplifier

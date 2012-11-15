@@ -1,0 +1,52 @@
+Copyright (C) 2012 mirage335
+See the end of the file for license conditions.
+See license.txt for Mirage335BiosignalAmp license conditions.
+
+mirage335-site.dyndns.org
+
+Intended to represent the best achievable biosignal amplifier with commercially available components and dry electrodes. Input referred thermal noise across a 50Hz bandwidth should be about one microvolt at worst. Common-mode rejection is subject to real world conditions, but should far exceed commercial units.
+
+New research was undertaken to select the best amplifier chips. See http://mirage335.dyndns.org/forums/viewtopic.php?f=4&t=16&sid=d09e2b47990c60269356eae3b596c3e3 for details.
+
+USA companies provide all parts in these schematics.
+
+__Usage__
+The Driven Right Leg may be connected to any reference point on the body. The connection need not be very solid; it is far less critical than the active electrodes. Despite the name, for EEG purposes, the right leg may introduce undesirable ECG signals from the heart. An armband or heavy necklace may be more convenient.
+
+The Active Electrodes are intended for dry skin. The gold pin headers make the connection to the user.
+
+__Setup__
+PCB pads should connect to a metal shields. Aluminum foil and metal tins work well.
+
+Both power supplies should be > +/-6V < +/-15V .
+
+SATA data cables are used to carry analog signals and power in one shielded cable.
+
+Host board signal output may be safely connected to non-isolated equipment, subject to the lightning strike warning below.
+
+__Safety__
+TEST the "HV Suppressor" transistor circuits. They protect users from amplifier chips failing short-circuit to power supply rails.
+The safety critical isolation line marked on the test board includes upstream components. These must not be exposed to >25uA ground referenced current. Batteries may be safe when properly connected. Wall-warts, ATX power supplies, and even electrical grounds, are extremely dangerous.
+
+Nearby lightning strikes will penetrate the isolation amplifier. A low-impedance earth connection to -ONLY- the non-isolated Vgnd may divert these faults. Alternatively, some 3-prong surge protectors may help, but they must clamp fast and well below 1.5kV. 
+High frequency radio transmissions will penetrate the isolation amplifier. Amateur radio operators should be careful.
+
+Passive electrodes -must- include the HV suppressors found on the active electrode boards. The most convenient way to build passive electrodes is to replace the amplifier chip on the active electrode board with a wire between pins 3 and 6.
+
+No claim of liability is made by anyone. Your accident is your accident. Use common sense. If you don't understand the safety features and limitations, don't use this circuit.
+
+__Copyright__
+This file is part of Mirage335BiosignalAmp.
+
+Mirage335BiosignalAmp is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Mirage335BiosignalAmp is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mirage335BiosignalAmp.  If not, see <http://www.gnu.org/licenses/>.

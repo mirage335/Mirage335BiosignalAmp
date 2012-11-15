@@ -1,0 +1,2 @@
+(component-library "./customParts")
+(component-library "./gedasymbols")
