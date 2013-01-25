@@ -9,7 +9,7 @@ __Tradeoffs__
 *) Temperature. Very slightly better noise performance may be obtained using a peltier cooler.
 *) Power consumption. Low noise components tend not to be battery friendly.
 *) Cost. Amplifiers with low flicker noise are rare, and expensive. Each of these represent approximately $10. However, the ultra low noise active electrodes, and DRL eliminate the need for expensive disposable gel electrodes.
-*) Availability. A few parts are not ideal. In particular, some of the 150Ohm resistors should have been 100Ohms to match SATA characteristic impedance and minimize reactance. However, that is insignificant compared to the greater availablity of high-quality 150Ohm resistors.
+*) Availability. A few parts are not ideal. Slight preference was given to better stocked parts.
 *) Resilience. The first 10x amplifier following the instrumentation amplifier is rated for half the current that may flow into its input during an oscillation. Should that component overheat (unlikely), a larger resistor will need to couple the two amplifiers, at the cost of slightly greater noise.
 *) Decoupling. Ideally, each amplifier chip should have 100pF and 0.1uF decoupling capacitors right next to it. Doing so incurrs excessive cost.
 *) Stability. Lower amplifier bandwidths provide greater stability. However, the OPA211 has a unity-gain bandwidth of 35MHz - grossly excessive for analog biosignal amplifiers. As a result, board designers must be rather careful about strays.
