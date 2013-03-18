@@ -1,5 +1,30 @@
 # Pin name action command file
 
+# Start of element Q2
+ChangePinName(Q2, 2, b)
+ChangePinName(Q2, 1, c)
+ChangePinName(Q2, 3, e)
+
+# Start of element C13
+ChangePinName(C13, 2, 2)
+ChangePinName(C13, 1, 1)
+
+# Start of element C18
+ChangePinName(C18, 2, 2)
+ChangePinName(C18, 1, 1)
+
+# Start of element R25
+ChangePinName(R25, 1, 1)
+ChangePinName(R25, 2, 2)
+
+# Start of element C19
+ChangePinName(C19, 2, 2)
+ChangePinName(C19, 1, 1)
+
+# Start of element C20
+ChangePinName(C20, 2, 2)
+ChangePinName(C20, 1, 1)
+
 # Start of element X3
 ChangePinName(X3, 7, shield)
 ChangePinName(X3, 6, signal)
@@ -12,14 +37,6 @@ ChangePinName(X3, 1, shield)
 # Start of element C12
 ChangePinName(C12, 2, 2)
 ChangePinName(C12, 1, 1)
-
-# Start of element C19
-ChangePinName(C19, 2, -)
-ChangePinName(C19, 1, +)
-
-# Start of element C18
-ChangePinName(C18, 2, -)
-ChangePinName(C18, 1, +)
 
 # Start of element BNC1
 ChangePinName(BNC1, 1, 1)
@@ -42,11 +59,6 @@ ChangePinName(X1, 4, shield)
 ChangePinName(X1, 2, Vee)
 ChangePinName(X1, 3, Vcc)
 ChangePinName(X1, 1, shield)
-
-# Start of element Q2
-ChangePinName(Q2, 2, B)
-ChangePinName(Q2, 1, E)
-ChangePinName(Q2, 3, C)
 
 # Start of element Q1
 ChangePinName(Q1, 2, 2)
@@ -232,10 +244,6 @@ ChangePinName(R8, 2, 2)
 # Start of element R12
 ChangePinName(R12, 1, 1)
 ChangePinName(R12, 2, 2)
-
-# Start of element C13
-ChangePinName(C13, 2, 2)
-ChangePinName(C13, 1, 1)
 
 # Start of element U2
 ChangePinName(U2, 6, Vo)

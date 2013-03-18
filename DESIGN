@@ -2,15 +2,15 @@ Copyright (C) 2012 mirage335
 See the end of the file for license conditions.
 
 __Tradeoffs__
-*) Bandwidth. Approximately 1.06Hz to 5.3kHz. Wider bandwidth may improve some EMG studies.
-*) Gain. Lower gain may be required for ECG, the high gain is required for EEG.
+*) Bandwidth. Approximately 0.7Hz to 2kHz. Wider bandwidth may improve some EMG studies.
+*) Gain. Lower gain may be required for across-the-chest ECG, the high gain is required for EEG.
 *) Isolation. The ISO124 provides excellent performance, but its minimum isolation voltage rating is only 1.5kV. Twice that would be preferred.
 *) Common-Mode Rejection vs. Internal Noise. The driven right leg and active probes may decrease external noise pickup (typically narrowband) at the cost of adding their own thermal noise (broadband). Slightly better noise performance may be obtained by omitting these components, using a faraday cage, and removing 60Hz noise with digital filters.
-*) Temperature. Very slightly better noise performance may be obtained using a peltier cooler.
+*) Temperature. Very slightly better noise performance may be obtained using a peltier cooler. However, strangely, some datasheets have specified greater noise below room temperature.
 *) Power consumption. Low noise components tend not to be battery friendly.
 *) Cost. Amplifiers with low flicker noise are rare, and expensive. Each of these represent approximately $10. However, the ultra low noise active electrodes, and DRL eliminate the need for expensive disposable gel electrodes.
 *) Availability. A few parts are not ideal. Slight preference was given to better stocked parts.
-*) Resilience. The first 10x amplifier following the instrumentation amplifier is rated for half the current that may flow into its input during an oscillation. Should that component overheat (unlikely), a larger resistor will need to couple the two amplifiers, at the cost of slightly greater noise.
+*) Resilience. The first 10x amplifier following the instrumentation amplifier is rated for half the current that may flow into its input during an oscillation. Should that component overheat (unlikely), a larger resistor will need to couple the two amplifiers, at the cost of slightly greater noise. Some 510Ohm resistors might overheat, though this is also unlikely.
 *) Decoupling. Ideally, each amplifier chip should have 100pF and 0.1uF decoupling capacitors right next to it. Doing so incurrs excessive cost.
 *) Stability. Lower amplifier bandwidths provide greater stability. However, the OPA211 has a unity-gain bandwidth of 35MHz - grossly excessive for analog biosignal amplifiers. As a result, board designers must be rather careful about strays.
 
@@ -26,7 +26,7 @@ __Theory__
 
 __Future Proofing__
 SATA cables between amplifier and active electrodes may be instrumented with solid-state relays, allowing the inputs to be chopped at high frequency. This may be useful to observe tissue (eg. muscle) responses to electrical stimulation.
-Amplifier and active electrode boards may be interchanged with a wide variety of designs.
+Amplifier, active electrode, and host boards may be interchanged with a wide variety of designs.
 
 __Copyright__
 This file is part of Mirage335BiosignalAmp.

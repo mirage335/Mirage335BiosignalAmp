@@ -6,7 +6,7 @@ FileVersion[20070407]
 PCB["" 600000 500000]
 
 Grid[2500.0 0 0 1]
-Cursor[115000 90000 0.000000]
+Cursor[0 52500 0.000000]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[1000 1000 1000 1000 1500 1000]
@@ -909,42 +909,6 @@ Element["" "1206" "C12" "0.1uF" 173405 182500 -3150 -3150 0 100 ""]
 
 	)
 
-Element["" "DO214AB" "D2" "-" 163400 150000 -22700 0 1 100 ""]
-(
-	Attribute("device" "TVS")
-	Attribute("manufacturer" "unknown")
-	Attribute("manufacturer_part_number" "unknown")
-	Attribute("vendor" "unknown")
-	Attribute("vendor_part_number" "unknown")
-	Pad[10900 -2000 10900 2000 14500 2000 15100 "1" "1" "square"]
-	Pad[-10900 -2000 -10900 2000 14500 2000 15100 "2" "2" "square"]
-	ElementLine [21700 -9200 21700 9200 2000]
-	ElementLine [21700 -9200 14500 -11800 1000]
-	ElementLine [-20700 -11800 14500 -11800 1000]
-	ElementLine [-20700 -11800 -20700 11800 1000]
-	ElementLine [-20700 11800 14500 11800 1000]
-	ElementLine [14500 11800 21700 9200 1000]
-
-	)
-
-Element["" "DO214AB" "D1" "-" 210200 150000 -22700 0 1 100 ""]
-(
-	Attribute("device" "TVS")
-	Attribute("manufacturer" "unknown")
-	Attribute("manufacturer_part_number" "unknown")
-	Attribute("vendor" "unknown")
-	Attribute("vendor_part_number" "unknown")
-	Pad[10900 -2000 10900 2000 14500 2000 15100 "1" "1" "square"]
-	Pad[-10900 -2000 -10900 2000 14500 2000 15100 "2" "2" "square"]
-	ElementLine [21700 -9200 21700 9200 2000]
-	ElementLine [21700 -9200 14500 -11800 1000]
-	ElementLine [-20700 -11800 14500 -11800 1000]
-	ElementLine [-20700 -11800 -20700 11800 1000]
-	ElementLine [-20700 11800 14500 11800 1000]
-	ElementLine [14500 11800 21700 9200 1000]
-
-	)
-
 Element["" "HEADER4_1" "CONN1" "-" 155000 175000 5000 21000 2 100 ""]
 (
 	Attribute("device" "CONNECTOR_4")
@@ -1091,24 +1055,6 @@ Element["" "0805" "C7" "100pF" 282853 164310 3150 3150 2 100 ""]
 
 	)
 
-Element["" "DO214AB" "D3" "-" 295900 220000 22700 0 3 100 ""]
-(
-	Attribute("device" "TVS")
-	Attribute("manufacturer" "unknown")
-	Attribute("manufacturer_part_number" "unknown")
-	Attribute("vendor" "unknown")
-	Attribute("vendor_part_number" "unknown")
-	Pad[-10900 -2000 -10900 2000 14500 2000 15100 "1" "1" "square"]
-	Pad[10900 -2000 10900 2000 14500 2000 15100 "2" "2" "square"]
-	ElementLine [-21700 -9200 -21700 9200 2000]
-	ElementLine [-21700 9200 -14500 11800 1000]
-	ElementLine [-14500 11800 20700 11800 1000]
-	ElementLine [20700 -11800 20700 11800 1000]
-	ElementLine [-14500 -11800 20700 -11800 1000]
-	ElementLine [-14500 -11800 -21700 -9200 1000]
-
-	)
-
 Element["" "EIA7343" "C1" "100uF" 323500 185000 -22900 0 1 100 ""]
 (
 	Attribute("device" "POLARIZED_CAPACITOR")
@@ -1232,6 +1178,60 @@ Element["" "1206" "C3" "4.7uF" 286595 140000 3150 3150 2 100 ""]
 	Pad[-5905 -1181 -5905 1181 5118 2000 5718 "2" "2" "square"]
 	ElementLine [-2362 3740 2362 3740 800]
 	ElementLine [-2362 -3740 2362 -3740 800]
+
+	)
+
+Element["" "DO214AB" "D1" "-" 210000 150000 22700 0 3 100 ""]
+(
+	Attribute("device" "TVS")
+	Attribute("manufacturer" "unknown")
+	Attribute("manufacturer_part_number" "unknown")
+	Attribute("vendor" "unknown")
+	Attribute("vendor_part_number" "unknown")
+	Pad[-10900 -2000 -10900 2000 14500 2000 15100 "1" "1" "square"]
+	Pad[10900 -2000 10900 2000 14500 2000 15100 "2" "2" "square"]
+	ElementLine [-21700 -9200 -21700 9200 2000]
+	ElementLine [-21700 9200 -14500 11800 1000]
+	ElementLine [-14500 11800 20700 11800 1000]
+	ElementLine [20700 -11800 20700 11800 1000]
+	ElementLine [-14500 -11800 20700 -11800 1000]
+	ElementLine [-14500 -11800 -21700 -9200 1000]
+
+	)
+
+Element["" "DO214AB" "D2" "-" 162500 150000 22700 0 3 100 ""]
+(
+	Attribute("device" "TVS")
+	Attribute("manufacturer" "unknown")
+	Attribute("manufacturer_part_number" "unknown")
+	Attribute("vendor" "unknown")
+	Attribute("vendor_part_number" "unknown")
+	Pad[-10900 -2000 -10900 2000 14500 2000 15100 "1" "1" "square"]
+	Pad[10900 -2000 10900 2000 14500 2000 15100 "2" "2" "square"]
+	ElementLine [-21700 -9200 -21700 9200 2000]
+	ElementLine [-21700 9200 -14500 11800 1000]
+	ElementLine [-14500 11800 20700 11800 1000]
+	ElementLine [20700 -11800 20700 11800 1000]
+	ElementLine [-14500 -11800 20700 -11800 1000]
+	ElementLine [-14500 -11800 -21700 -9200 1000]
+
+	)
+
+Element["" "DO214AB" "D3" "-" 297500 220000 -22700 0 1 100 ""]
+(
+	Attribute("device" "TVS")
+	Attribute("manufacturer" "unknown")
+	Attribute("manufacturer_part_number" "unknown")
+	Attribute("vendor" "unknown")
+	Attribute("vendor_part_number" "unknown")
+	Pad[10900 -2000 10900 2000 14500 2000 15100 "1" "1" "square"]
+	Pad[-10900 -2000 -10900 2000 14500 2000 15100 "2" "2" "square"]
+	ElementLine [21700 -9200 21700 9200 2000]
+	ElementLine [21700 -9200 14500 -11800 1000]
+	ElementLine [-20700 -11800 14500 -11800 1000]
+	ElementLine [-20700 -11800 -20700 11800 1000]
+	ElementLine [-20700 11800 14500 11800 1000]
+	ElementLine [14500 11800 21700 9200 1000]
 
 	)
 Layer(1 "component")
@@ -1393,9 +1393,9 @@ Layer(2 "solder")
 Layer(3 "outline")
 (
 	Line[410000 280000 410000 120000 1000 2000 "clearline"]
-	Line[120000 120000 120000 280000 1000 2000 "clearline"]
-	Line[120000 280000 410000 280000 1000 2000 "clearline"]
-	Line[410000 120000 120000 120000 1000 2000 "clearline"]
+	Line[127500 120000 127500 280000 1000 2000 "clearline"]
+	Line[410000 120000 127500 120000 1000 2000 "clearline"]
+	Line[127500 280000 410000 280000 1000 2000 "clearline"]
 )
 Layer(4 "GND")
 (
@@ -1440,6 +1440,18 @@ Layer(9 "silk")
 )
 Layer(10 "silk")
 (
+	Line[387500 212500 372500 212500 1000 2000 "clearline"]
+	Line[325000 217500 325000 232500 1000 2000 "clearline"]
+	Line[385000 237500 385000 242500 1000 2000 "clearline"]
+	Line[382500 240000 387500 240000 1000 2000 "clearline"]
+	Line[372500 240000 377500 240000 1000 2000 "clearline"]
+	Line[342500 237500 342500 242500 1000 2000 "clearline"]
+	Line[342500 242500 340000 240000 1000 2000 "clearline"]
+	Line[342500 242500 345000 240000 1000 2000 "clearline"]
+	Line[137500 172500 137500 187500 1000 2000 "clearline"]
+	Line[162500 183500 162500 186500 1000 2000 "clearline"]
+	Line[161500 175000 163500 175000 1000 2000 "clearline"]
+	Line[162500 174000 162500 176000 1000 2000 "clearline"]
 )
 NetList()
 (
@@ -1457,7 +1469,7 @@ NetList()
 		Connect("CONN2-3")
 		Connect("CONN3-3")
 		Connect("CONN3-4")
-		Connect("D3-2")
+		Connect("D3-1")
 		Connect("D4-2")
 		Connect("D5-1")
 		Connect("U1-8")
@@ -1471,8 +1483,8 @@ NetList()
 		Connect("C13-1")
 		Connect("CONN1-2")
 		Connect("CONN1-3")
-		Connect("D1-2")
-		Connect("D2-1")
+		Connect("D1-1")
+		Connect("D2-2")
 		Connect("U1-16")
 		Connect("X1-1")
 		Connect("X1-4")
@@ -1484,7 +1496,7 @@ NetList()
 		Connect("C10-2")
 		Connect("C12-1")
 		Connect("CONN1-1")
-		Connect("D2-2")
+		Connect("D2-1")
 		Connect("U1-1")
 		Connect("X1-3")
 	)
@@ -1493,7 +1505,7 @@ NetList()
 		Connect("C9-1")
 		Connect("C11-2")
 		Connect("CONN1-4")
-		Connect("D1-1")
+		Connect("D1-2")
 		Connect("U1-2")
 		Connect("X1-2")
 	)
@@ -1522,7 +1534,7 @@ NetList()
 	(
 		Connect("CONN3-1")
 		Connect("CONN3-2")
-		Connect("D3-1")
+		Connect("D3-2")
 		Connect("R3-2")
 	)
 	Net("Vcc" "(unknown)")

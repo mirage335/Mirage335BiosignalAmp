@@ -5,8 +5,8 @@ FileVersion[20070407]
 
 PCB["" 600000 500000]
 
-Grid[3937.0 0 0 1]
-Cursor[118110 149606 0.000000]
+Grid[2500.0 0 0 1]
+Cursor[127500 155000 0.000000]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[1000 1000 1000 1000 1500 1000]
@@ -786,7 +786,7 @@ Symbol['~' 1200]
 	SymbolLine[1500 3500 2000 3500 800]
 	SymbolLine[2000 3500 2500 3000 800]
 )
-Attribute("PCB::grid::unit" "mm")
+Attribute("PCB::grid::unit" "mil")
 Via[205000 272500 6000 2000 0 3500 "" "thermal(3S)"]
 Via[275000 205000 6000 2000 0 3500 "" "thermal(3S)"]
 
@@ -938,21 +938,6 @@ Element["" "1206" "R1" "150" 279095 222500 -3150 -3150 0 100 ""]
 
 	)
 
-Element["" "TO92" "Q2" "-" 295000 250000 -13000 -1000 1 100 ""]
-(
-	Attribute("device" "BC557")
-	Attribute("manufacturer" "unknown")
-	Attribute("manufacturer_part_number" "unknown")
-	Attribute("vendor" "unknown")
-	Attribute("vendor_part_number" "unknown")
-	Pin[0 -20000 7200 3000 7800 4200 "E" "1" "square,thermal(3S)"]
-	Pin[0 -10000 7200 3000 7800 4200 "B" "2" ""]
-	Pin[0 0 7200 3000 7800 4200 "C" "3" ""]
-	ElementLine [-7000 -17000 -7000 -3000 1000]
-	ElementArc [0 -10000 10000 10000 45 270 1000]
-
-	)
-
 Element["" "1206" "R4" "49.9k" 277559 271653 3150 3150 2 100 ""]
 (
 	Attribute("device" "RESISTOR")
@@ -1101,6 +1086,32 @@ Element["" "SO8" "U1" "-" 250407 227972 -2000 -6000 0 100 ""]
 	ElementArc [0 -9500 2500 2500 0 180 1000]
 
 	)
+
+Element["" "TO92" "Q2" "BC557" 295000 230000 13000 1000 3 100 ""]
+(
+	Attribute("device" "PNP_TRANSISTOR")
+	Attribute("manufacturer" "unknown")
+	Attribute("manufacturer_part_number" "unknown")
+	Attribute("vendor" "unknown")
+	Attribute("vendor_part_number" "unknown")
+	Pin[0 20000 7200 3000 7800 4200 "c" "1" "square"]
+	Pin[0 10000 7200 3000 7800 4200 "b" "2" ""]
+	Pin[0 0 7200 3000 7800 4200 "e" "3" "thermal(3S)"]
+	ElementLine [7000 3000 7000 17000 1000]
+	ElementArc [0 10000 10000 10000 225 270 1000]
+
+	)
+
+Element["" "" "" "" 290000 202500 0 0 0 100 ""]
+(
+	Pad[0 2500 12500 2500 2500 2000 4500 "" "1" ""]
+	Pad[0 5000 12500 5000 2500 2000 4500 "" "2" ""]
+	Pad[0 0 0 7500 2500 2000 4500 "" "3" ""]
+	Pad[0 7500 12500 7500 2500 2000 4500 "" "4" "square"]
+	Pad[12500 0 12500 7500 2500 2000 4500 "" "5" ""]
+	Pad[0 0 12500 0 2500 2000 4500 "" "6" "square"]
+
+	)
 Layer(1 "component")
 (
 	Line[201810 260000 208190 260000 2500 2000 "clearline"]
@@ -1144,7 +1155,6 @@ Layer(1 "component")
 	Line[191000 278000 190000 277000 2500 2000 "clearline"]
 	Line[190000 277000 190000 273000 2500 2000 "clearline"]
 	Line[285000 190000 295000 200000 2500 2000 "clearline"]
-	Line[295000 200000 295000 207500 2500 2000 ""]
 	Line[293190 238190 295000 240000 1000 2000 "clearline"]
 	Line[275000 238190 293190 238190 1000 2000 "clearline"]
 	Line[294586 260000 297500 260000 2500 2000 "clearline"]
@@ -1207,13 +1217,10 @@ Layer(1 "component")
 	Line[294586 272342 291338 275590 1000 2000 "clearline"]
 	Line[283464 264036 283464 284036 1000 2000 ""]
 	Line[283464 284036 280000 287500 1000 2000 ""]
+	Line[295000 200000 295000 202500 2500 2000 "clearline"]
 	Polygon("clearpoly")
 	(
 		[185000 282500] [305000 282500] [305000 302500] [185000 302500] 
-	)
-	Polygon("clearpoly")
-	(
-		[305000 202500] [287500 202500] [287500 212500] [305000 212500] 
 	)
 )
 Layer(2 "solder")
@@ -1222,9 +1229,9 @@ Layer(2 "solder")
 Layer(3 "outline")
 (
 	Line[181102 307086 311023 307086 1000 2000 "clearline"]
-	Line[181102 307086 181102 145669 1000 2000 "clearline"]
-	Line[181102 145669 311023 145669 1000 2000 "clearline"]
-	Line[311023 145669 311023 307086 1000 2000 "clearline"]
+	Line[181102 148169 311023 148169 1000 2000 "clearline"]
+	Line[181102 148169 181102 307086 1000 2000 "clearline"]
+	Line[311023 307086 311023 148169 1000 2000 "clearline"]
 )
 Layer(4 "GND")
 (
@@ -1273,7 +1280,7 @@ NetList()
 		Connect("C8-2")
 		Connect("C9-2")
 		Connect("Q1-3")
-		Connect("Q2-1")
+		Connect("Q2-3")
 		Connect("X1-5")
 	)
 	Net("unnamed_net1" "(unknown)")
@@ -1290,7 +1297,7 @@ NetList()
 	Net("unnamed_net3" "(unknown)")
 	(
 		Connect("Q1-1")
-		Connect("Q2-3")
+		Connect("Q2-1")
 		Connect("R3-1")
 		Connect("R4-2")
 	)

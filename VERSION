@@ -1,0 +1,37 @@
+Copyright (C) 2012 mirage335
+See the end of the file for license conditions.
+
+__Version__
+1.1
+
+__Changelog__
+=1.0=
+Initial release.
+=1.1=
+Minor bugfixes.
+*) BC557 PNP transistor polarity corrected.
+*) Three mismatched capacitor footprints resolved.
+*) Two 47nF capacitors added to remove >2kHz noise.
+*) Amplifier output stabilized at ground by 100k resistor.
+*) Excessive electrolytic AC coupling capacitors on amplifier board output replaced.
+*) Board outlines moved for better SATA connector compatibility.
+*) Ground/shield soldering areas changed from polygons to pads.
+*) Host to Amplifier SATA cable shield ground bonded at both ends.
+*) Better labeling added to host board silkscreen.
+*) Consistient alignment for bidirectional TVS diodes.
+
+__Copyright__
+This file is part of Mirage335BiosignalAmp.
+
+Mirage335BiosignalAmp is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Mirage335BiosignalAmp is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Mirage335BiosignalAmp.  If not, see <http://www.gnu.org/licenses/>.
