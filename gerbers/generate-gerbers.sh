@@ -84,6 +84,12 @@ MAX_GROUPS=32  # What's the highest group number we should expect
 	       # be workflows where this is not true. There isn't a
 	       # problem setting this high
 
+function get_layer_name {
+    filename=$1
+    name=$(head $filename | sed -n -e '/Title/s/.*, \([^\*]*\).*/\1/p')
+    echo $name
+}
+
 # Remove any old files
 find . -maxdepth 1 -name \*.zip -delete
 find . -maxdepth 1 -type d -and -not -name '.' -exec rm -rf {} \;
@@ -103,25 +109,50 @@ find . -name \*paste\* -delete
 find . -name \*silk\* -size -380c -delete
 
 # Oshpark is picky about internal layer naming (4 layer boards).
-internal_layers=$(( $MAX_LAYERS-2 ))
 count=0
 for pcbname in `ls .. |sed -n -e '/\.pcb/s/\.pcb$//p'`; do
     for layer in `seq 1 $MAX_GROUPS`; do
 	if [[ -e $pcbname/$pcbname.group$layer.gbr ]]; then
 	    if [[ `stat -c%s $pcbname/$pcbname.group$layer.gbr` -lt 2500 ]]; then
-		echo "WARNING: Layer '`head $pcbname/$pcbname.group$layer.gbr |awk '/Title:/ {print $5}'`' is probably empty"
+		layer_name=$(get_layer_name $pcbname/$pcbname.group$layer.gbr)
+		echo "WARNING: Layer '$layer_name' is probably empty"
 	    fi
 	    mv $pcbname/$pcbname.group$layer.gbr $pcbname/$pcbname.G$(($count+2))L
-	    count=$(( count+=1 ))
+	    count=$(( $count+1 ))
 	fi
     done
+
+    # Warn if non-standard layer count
     if [[ $(( $count % 2 )) = 1 ]]; then
 	echo "WARNING: There are $(( $count+2 )) layers, did you mean to have a $(( $count+3 )) layer board? If so, add another empty layer."
     fi
-    if [[ $count -gt $internal_layers ]]; then
+
+    # Warn if more layers than OSHPark can do
+    if [[ $(( $count+2 )) -gt $MAX_LAYERS ]]; then
 	echo "WARNING: Detected $(( $count+2 )) layer board; OSHPark maxes out at $MAX_LAYERS"
     fi
-    echo "Processed $pcbname.pcb: $(( $count+2 )) layers"
+
+    # Write a summary of the generated layers and their ordering
+    echo -n "Processed $pcbname.pcb: $(( $count+2 )) layers. "
+    layers="$pcbname/$pcbname.top.gbr"
+    if [[ ! $count -eq 0 ]]; then
+	for i in `seq 2 $(( $count+1 ))`; do
+	    layers+=" $pcbname/$pcbname.G${i}L"
+	done
+    fi
+    layers+=" $pcbname/$pcbname.bottom.gbr"
+    i=0
+    for layer in $layers; do
+	name=$(get_layer_name $layer)
+	if [[ $i -eq 0 ]]; then
+	    echo -n "[ $name |"
+	elif [[ $i -eq $(( $count+1 )) ]]; then
+	    echo " $name ]"
+	else
+	    echo -n " $name |"
+	fi
+	i=$(( $i+1 ))
+    done
     count=0
 done
 
