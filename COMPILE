@@ -13,6 +13,11 @@ Components with "X" at the front of their description make the circuit slightly 
 
 LibreOffice Calc (spreadsheet) can take an HTML copy/pasted from a web browser. From there, prices can be added after stripping extraneous description information with the following regex: \ [^0-9].*
 
+For pie chart generation, the following LibreOffice Calc equations are helpful:
+=IF(OR($B2="OPA121",$B2="LT1168",$B2="OPA211",$B2="ISO124",$B2="LTC2440",$B2="ATMEGA32U4-AU",$B2="RESISTOR",$B2="CAPACITOR",$B2="POLARIZED_CAPACITOR",$B2="SATA_Connector"),$B2,"OTHER")
+=SUMIF($C$2:$C$71,A75,$J$2:$J$71)
+
+
 __Copyright__
 This file is part of Mirage335BiosignalAmp.
 
