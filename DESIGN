@@ -24,6 +24,9 @@ __Theory__
 *) The isolation amplifer provides approximately 17bits of resolution (maximum signal output is 2^17 times greater than noise output). That more than a hundred times better than the 10bit resolution of most microcontroller analog to digital converters.
 *) The active electrodes use the OPA121 for its extremely low current noise, as its inputs face a high-impedance connection to the user. The OPA211 offers lower voltage noise, and handles the low-impedance internal tasks.
 
+__ArduinoDAQ__
+ArduinoDAQ system has been merged onto the host board for USB support. See https://github.com/mirage335/ArduinoDAQ for details.
+
 __Future Proofing__
 SATA cables between amplifier and active electrodes may be instrumented with solid-state relays, allowing the inputs to be chopped at high frequency. This may be useful to observe tissue (eg. muscle) responses to electrical stimulation.
 Amplifier, active electrode, and host boards may be interchanged with a wide variety of designs.

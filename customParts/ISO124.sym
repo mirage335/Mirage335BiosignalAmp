@@ -1,4 +1,4 @@
-v 20110115 2
+v 20121123 2
 L 300 100 300 2100 3 0 0 0 -1 -1
 L 300 2100 1000 1600 3 0 0 0 -1 -1
 L 1000 600 300 100 3 0 0 0 -1 -1
@@ -10,9 +10,9 @@ pintype=pwr
 T 700 355 5 10 1 1 90 0 1
 pinlabel=GND1
 T 650 305 5 10 1 1 90 6 1
-pinnumber=16
+pinnumber=8
 T 700 100 5 10 0 0 0 0 1
-pinseq=16
+pinseq=8
 }
 P 500 0 500 300 1 0 0
 {
@@ -43,9 +43,9 @@ pintype=pwr
 T 1500 455 5 10 1 1 90 0 1
 pinlabel=+V2
 T 1450 405 5 10 1 1 90 6 1
-pinnumber=9
+pinnumber=5
 T 1500 200 5 10 0 0 0 0 1
-pinseq=9
+pinseq=5
 }
 P 1700 400 1700 700 1 0 0
 {
@@ -54,9 +54,9 @@ pintype=pwr
 T 1700 655 5 10 1 1 90 0 1
 pinlabel=GND2
 T 1650 605 5 10 1 1 90 6 1
-pinnumber=8
+pinnumber=4
 T 1700 400 5 10 0 0 0 0 1
-pinseq=8
+pinseq=4
 }
 P 1900 500 1900 800 1 0 0
 {
@@ -65,9 +65,9 @@ pintype=pwr
 T 1900 755 5 10 1 1 90 0 1
 pinlabel=-V2
 T 1850 705 5 10 1 1 90 6 1
-pinnumber=10
+pinnumber=6
 T 1900 500 5 10 0 0 0 0 1
-pinseq=10
+pinseq=6
 }
 P 0 1000 300 1000 1 0 0
 {
@@ -76,9 +76,9 @@ pintype=in
 T 155 795 5 10 1 1 0 0 1
 pinlabel=Vi
 T 305 1045 5 10 1 1 0 6 1
-pinnumber=15
+pinnumber=7
 T 0 1000 5 10 0 0 0 0 1
-pinseq=15
+pinseq=7
 }
 P 2600 1100 2300 1100 1 0 0
 {
@@ -87,9 +87,9 @@ pintype=out
 T 2345 995 5 10 1 1 0 6 1
 pinlabel=Vo
 T 2295 1145 5 10 1 1 0 0 1
-pinnumber=7
+pinnumber=3
 T 2600 1100 5 10 0 0 0 0 1
-pinseq=7
+pinseq=3
 }
 L 2300 1100 1300 1800 3 0 0 0 -1 -1
 L 2300 1100 1300 400 3 0 0 0 -1 -1

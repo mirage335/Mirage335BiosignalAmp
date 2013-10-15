@@ -13,19 +13,22 @@ USA companies provide all parts in these schematics.
 __Usage__
 The Driven Right Leg may be connected to any reference point on the body. The connection need not be very solid; it is far less critical than the active electrodes. Despite the name, for EEG purposes, the right leg may introduce undesirable ECG signals from the heart. An armband or heavy necklace may be more convenient.
 
-The Active Electrodes are intended for dry skin. The gold pin headers make the connection to the user.
+The active electrodes may be used with pin headers in firm contact with dry skin, or saline sponges.
 
 __Setup__
 PCB pads should connect to a metal shields. Aluminum foil and metal tins work well.
 
-Both power supplies should be > +/-6V < +/-15V .
+Both power supplies should be > +/-6V < +/-15V . Mouser part 919-RS-1212D may provide suitable power.
 
 SATA data cables are used to carry analog signals and power in one shielded cable.
 
-Host board signal output may be safely connected to non-isolated equipment, subject to the lightning strike warning below.
+Host board signal and USB outputs may be safely connected to non-isolated equipment, subject to the lightning strike warning below.
+
+Host board USB data acqusition system is derrived from ArduinoDAQ. Essentially an Arduino Leonardo clone, an ISP programmer or arduino is required to flash firmware.
 
 __Safety__
 TEST the "HV Suppressor" transistor circuits. They protect users from amplifier chips failing short-circuit to power supply rails.
+
 The safety critical isolation line marked on the test board includes upstream components. These must not be exposed to >25uA ground referenced current. Batteries may be safe when properly connected. Wall-warts, ATX power supplies, and even electrical grounds, are extremely dangerous.
 
 Nearby lightning strikes will penetrate the isolation amplifier. A low-impedance earth connection to -ONLY- the non-isolated Vgnd may divert these faults. Alternatively, some 3-prong surge protectors may help, but they must clamp fast and well below 1.5kV. 
