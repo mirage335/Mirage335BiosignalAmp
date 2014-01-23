@@ -38,7 +38,7 @@ No licenses were found with these examples. Public domain or fair use assumed.
 Arduino DAQ Firmware
 Emits samples in S32_LE format over USB Serial (ie. /dev/tty?) at the rate specificied by the sampleRate variable. Up to 3000 samples/sec has been successfully tested.
 
-Default 100Hz sample rate, suitable for EEG pickup.
+Default 150Hz sample rate, low pass filtered down to 45Hz, suitable for EEG pickup.
 
 Unix machines can process this data with the following commands, among others:
 stty -F /dev/ttyACM0 raw ; echo -n "" > /dev/ttyACM0 ; timeout 10 cat /dev/ttyACM0 > test ; wc -c test
@@ -58,29 +58,49 @@ stty -F /dev/ttyACM0 raw ; echo -n "" > /dev/ttyACM0 ; hexdump /dev/ttyACM0
 #define lowPass(newValue, filteredValue, inertiaFloat)                            \
   filteredValue = filteredValue + (inertiaFloat * (newValue - filteredValue));
 
-//Automatically cascades low pass filters, returning the final value as arrayName[filterLoop] .
-//The arrayName is not important, however, the array must retain values from one cycle to the next (ie. static).
-#define highOrderLowPass(newValue, inertiaFloat, filterOrder, arrayName)          \
-  static float arrayName[(filterOrder+1)];                                        \
-  arrayName[0] = newValue;                                                        \
-  static int filterLoop;                                                          \
-  for (filterLoop=0; filterLoop < filterOrder; filterLoop++)                      \
-    lowPass(arrayName[filterLoop], arrayName[filterLoop+1], inertiaFloat);
+//IIR Biquad Filter.
+//Parameters b0, b1, b2, a1, a2 are filter coefficients. See http://gnuradio.4.n7.nabble.com/IIR-filter-td40994.html and http://www.earlevel.com/main/2013/10/13/biquad-calculator-v2/ .
+//Data is returned in the float named [filteredValue] . This variable must be externally declared.
+//State variables unique_d1_name and unique_d2_name should be statically declared floats.
+#define IIRbiquad(newValue, filteredValue, unique_d1_name, unique_d2_name, b0, b1, b2, a1, a2)			\
+														\
+	filteredValue = b0 * newValue + unique_d1_name;								\
+	unique_d1_name = (float)b1 * (float)newValue + (float)a1 * filteredValue + unique_d2_name; 	\
+	unique_d2_name = (float)b2 * (float)newValue + (float)a2 * filteredValue;
+
+//High Order IIR Biquad Filter.
+//Parameters b0, b1, b2, a1, a2 are filter coefficients. See http://gnuradio.4.n7.nabble.com/IIR-filter-td40994.html and http://www.earlevel.com/main/2013/10/13/biquad-calculator-v2/ .
+//Data is returned in the float named [filteredValue] .
+#define highOrderIIRbiquad(newValue, filteredValue, stateOneArrayName, stateTwoArrayName, b0, b1, b2, a1, a2, filterOrder)	\
+	static float stateOneArrayName[(filterOrder+1)];									\
+	static float stateTwoArrayName[(filterOrder+1)];									\
+	lowerOrderFilteredValue = newValue;											\
+																\
+	for (filterLoop=0; filterLoop < filterOrder; filterLoop++) {								\
+		IIRbiquad(lowerOrderFilteredValue, filteredValue, stateOneArrayName[filterLoop], stateTwoArrayName[filterLoop], b0, b1, b2, a1, a2) \
+		lowerOrderFilteredValue = filteredValue;									\
+	}
 
 typedef union {
   long longValue;
   byte binary[4];
 } binaryLong;
 
+typedef union {
+  float floatValue;
+  byte binary[4];
+} binaryFloat;
+
 //*****CONFIG*****
 
 //Maximum sample rate is less than the LTC2440 conversion rate, defined by the oversampling ratio, set by the speedBits variable. Faster speedBits settings lead to increased noise and loss of built-in low-pass filter (anti-aliasing) characteristics. See Table 3 in the LTC2440 datasheet.
-const int sampleRate = 100+1;                         //Desired sample rate in Hz. Test with stty -F /dev/ttyACM0 raw ; echo -n "" > /dev/ttyACM0 ; timeout 10 cat /dev/ttyACM0 > test ; wc -c test .
-const int speedBits=0b0110;                           //Oversample ratio, determines LTC2440 bandwidth and maximum sampling rate. See datasheet Tabel 3. {0b0001 = 3.52kHz, 0b0010=1.76kHz, 0b0101=220Hz, 0b0110=110Hz, 0b1111=6.875Hz}
+const int sampleRate = 150;                           //Desired sample rate in Hz. Test with stty -F /dev/ttyACM0 raw ; echo -n "" > /dev/ttyACM0 ; timeout 10 cat /dev/ttyACM0 > test ; wc -c test .
+const int speedBits=0b0101;                           //Oversample ratio, determines LTC2440 bandwidth and maximum sampling rate. See datasheet Tabel 3. {0b0001 = 3.52kHz, 0b0010=1.76kHz, 0b0101=220Hz, 0b0110=110Hz, 0b1111=6.875Hz}
 
 //Maximizes IIR low-pass anti-alias filtering.
 //WARNING: Extremely high filter orders (>300) will consume too much RAM, and may break bootloaders.
-const int filterOrder = (2750/sampleRate*5)%300;    //Autocalculates IIR filter maximum order up to 300.
+//WARNING: Old code, for reference only.
+//const int filterOrder = (2750/sampleRate*5)%300;    //Autocalculates IIR filter maximum order up to 300.
 //const int filterOrder = 300;                      //Only use for sampling rates < 50Hz.
 
 const byte slaveSelectPin = 10;  // digital pin 10 for /CS
@@ -112,6 +132,8 @@ void setup() {
     SPI.setClockDivider(SPI_CLOCK_DIV2);  //8MHz clock. 250000 32bit samples/sec may be read at this rate.
     
     //Startup LED indicator.
+    pinMode (led, OUTPUT);
+    
     for (int i=0; i<=10; i++) {
       delay(100);
       digitalWrite(led, HIGH);
@@ -186,20 +208,37 @@ ISR(TIMER1_COMPA_vect)
   if (volts > (2.5))
     volts=((5)-volts)*(-1);  //Polarity correction.
   
-  //IIR low pass filter augments LTC2440 built-in anti-alias filter, particularly at lower oversample rates (higher conversion rates).
-  highOrderLowPass(volts, (float)0.45, filterOrder, specificVolts);
+  //IIR filters augment LTC2440 built-in anti-alias filter and 60Hz rejection filter, particularly at lower oversample rates (higher conversion rates).
+  static float filteredVolts=0;
+  
+  static int filterLoop;
+  static float lowerOrderFilteredValue;
+  
+  //Low pass filter. 45Hz corner frequency at 150Hz sample rate.
+  highOrderIIRbiquad(volts, filteredVolts, lowPassStateOne, lowPassStateTwo, 0.39133426347022965, 0.7826685269404593, 0.39133426347022965, -0.3695259524151477, -0.19581110146577096, 8);
+  
+  //High pass (AC coupling) filter. 0.35Hz corner frequency at 150Hz sample rate. Mostly useful for removing amplifier flicker noise.
+  highOrderIIRbiquad(filteredVolts, filteredVolts, highPassStateOne, highPassStateTwo, 0.9896867236566386, -1.9793734473132771, 0.9896867236566386, 1.9792670828350616, -0.9794798117914928, 2);
+  
+  //60Hz notch filter at 150Hz sample rate.
+  highOrderIIRbiquad(filteredVolts, filteredVolts, sixtyNotchStateOne, sixtyNotchStateTwo, 0.9883808858331896, 1.5992338671088302, 0.9883808858331896, -1.5992338671088302, -0.9767617716663792, 1);
+  
+  //30Hz notch filter at 150H sample rate.
+  highOrderIIRbiquad(filteredVolts, filteredVolts, thirtyNotchStateOne, thirtyNotchStateTwo, 0.9813339196216473, -0.6064977166393354, 0.9813339196216473, 0.6064977166393354, -0.9626678392432946, 1);
   
   //Human readable format.
   //Serial.println("");
-  //Serial.println((float)volts,6);                       //Raw.
-  //Serial.println((float)(specificVolts[filterLoop]),6); //Filtered.
+  //Serial.println((float)volts,6);             //Raw.
+  //Serial.println((float)(filteredVolts),6);   //Filtered.
   
   //Prepare value for binary readout.
   static binaryLong convertableMicroVolts;
-  convertableMicroVolts.longValue = specificVolts[filterLoop] * 1000000;
+  convertableMicroVolts.longValue = filteredVolts * 1000000;
   
   //Optional gain. Drops dynamic range..
   //convertableMicroVolts.longValue *= (long)1000000;
+  
+  //convertableMicroVolts.longValue *= (long)10000;
   
   //Compatible with aplay -f S32_LE .
   Serial.write(convertableMicroVolts.binary,4);
