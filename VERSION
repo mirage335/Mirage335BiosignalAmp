@@ -23,6 +23,8 @@ Minor bugfixes.
 *) Improved active electrodes. Smaller and modular.
 =1.3=
 *) USB DAQ system, 24bit resolution.
+=1.4=
+*) IIR biquad filters in firmware, SolidWorks files for 3D printable enclosures, updated documentation.
 
 __Copyright__
 This file is part of Mirage335BiosignalAmp.

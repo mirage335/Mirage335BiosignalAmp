@@ -13,16 +13,22 @@ USA companies provide all parts in these schematics.
 __Usage__
 The Driven Right Leg may be connected to any reference point on the body. The connection need not be very solid; it is far less critical than the active electrodes. Despite the name, for EEG purposes, the right leg may introduce undesirable ECG signals from the heart. An armband or heavy necklace may be more convenient.
 
-The active electrodes may be used with pin headers in firm contact with dry skin, or saline sponges.
+The active electrodes may be used with pin headers in firm contact with dry skin, or saline sponges. Active electrode PCBs should be thoroughly and carefully sealed with hot glue or other heavy sealant.
+
+Host board may be connected to USB, for signal processing with the Biosignal Processor software (https://github.com/mirage335/BiosignalProcessor), or taken directly in analog format from the BNC connector.
 
 __Setup__
-PCB pads should connect to a metal shields. Aluminum foil and metal tins work well.
+Obtain all parts from MOUSER/DigiKey as specified in the HTML Bill-Of-Materials files. Obtain circuit boards from oshpark.
+
+Assemble the boards by placing and soldering components as per the PCB and BOM files. Recommend reflow soldering with laser cut solder stencil, except for the front-end high-performance amplifier chips.
+
+PCB pads are provided for connection to metal shields. Aluminum foil, metal tins, and even random insullated wire may be effective.
 
 Both power supplies should be > +/-6V < +/-15V . Mouser part 919-RS-1212D may provide suitable power.
 
 SATA data cables are used to carry analog signals and power in one shielded cable.
 
-Host board signal and USB outputs may be safely connected to non-isolated equipment, subject to the lightning strike warning below.
+Host board analog signal and USB outputs may be safely connected to non-isolated equipment, subject to the lightning strike warning below.
 
 Host board USB data acqusition system is derrived from ArduinoDAQ. Essentially an Arduino Leonardo clone, an ISP programmer or arduino is required to flash firmware.
 

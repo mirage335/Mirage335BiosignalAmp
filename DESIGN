@@ -3,25 +3,25 @@ See the end of the file for license conditions.
 
 __Tradeoffs__
 *) Bandwidth. Approximately 0.7Hz to 2kHz. Wider bandwidth may improve some EMG studies.
-*) Gain. Lower gain may be required for across-the-chest ECG, the high gain is required for EEG.
+*) Gain. High gain is required for EEG.
 *) Isolation. The ISO124 provides excellent performance, but its minimum isolation voltage rating is only 1.5kV. Twice that would be preferred.
 *) Common-Mode Rejection vs. Internal Noise. The driven right leg and active probes may decrease external noise pickup (typically narrowband) at the cost of adding their own thermal noise (broadband). Slightly better noise performance may be obtained by omitting these components, using a faraday cage, and removing 60Hz noise with digital filters.
-*) Temperature. Very slightly better noise performance may be obtained using a peltier cooler. However, strangely, some datasheets have specified greater noise below room temperature.
+*) Temperature. Noise may increase above and below room temperature.
 *) Power consumption. Low noise components tend not to be battery friendly.
 *) Cost. Amplifiers with low flicker noise are rare, and expensive. Each of these represent approximately $10. However, the ultra low noise active electrodes, and DRL eliminate the need for expensive disposable gel electrodes.
 *) Availability. A few parts are not ideal. Slight preference was given to better stocked parts.
-*) Resilience. The first 10x amplifier following the instrumentation amplifier is rated for half the current that may flow into its input during an oscillation. Should that component overheat (unlikely), a larger resistor will need to couple the two amplifiers, at the cost of slightly greater noise. Some 510Ohm resistors might overheat, though this is also unlikely.
-*) Decoupling. Ideally, each amplifier chip should have 100pF and 0.1uF decoupling capacitors right next to it. Doing so incurrs excessive cost.
+*) Resilience. The first 10x amplifier following the instrumentation amplifier is rated for half the current that may flow into its input during an oscillation. Theoretically, it is possible for that component to overheat, though that has not been ovserved.
+*) Decoupling. Ideally, each amplifier chip should have 100pF and 0.1uF decoupling capacitors right next to it. Doing so incurrs cost.
 *) Stability. Lower amplifier bandwidths provide greater stability. However, the OPA211 has a unity-gain bandwidth of 35MHz - grossly excessive for analog biosignal amplifiers. As a result, board designers must be rather careful about strays.
 
 __Theory__
-*) Most 60Hz noise will be equal to both inputs, and referenced to circuit ground. Instrumentation amplifiers, like baluns are very good at rejecting these common-mode signals.
+*) Most 60Hz noise will be equal to both inputs, and referenced to circuit ground. Instrumentation amplifiers, like baluns, are very good at rejecting these common-mode signals.
 *) Active electrodes have a low-impedance output, effectively short-circuiting high-impedance capacitively coupled noise on the cables.
 *) Driven Right Leg circuits exaggerate the anti common-mode signal provided by a stable ground reference. In doing so, they emulate a lower impedance ground connection to the user.
 *) See "Reduction of Power Line Interference using Active Electrodes and a Driven-Right-Leg Circuit in Electroencephalographic Recording with a Minimum Number of Electrodes" by A. Nonclercq, P. Mathys for practical measurements of the effects of active electrodes and DRL circuits.
 *) Driven shields eliminate cable charging and discharging, thereby reducing cable capacitance.
 *) Feedback AC Coupling is a low-noise method to remove DC voltages from instrumentation amplifier outputs. It tends to be lower noise than simple capacitive coupling, as a high-impedance connection is avoided early in the signal path. Furthermore, the only noise added by the feedback amplifier is below the cutoff frequency - thus mostly irrelevant.
-*) The isolation amplifer provides approximately 17bits of resolution (maximum signal output is 2^17 times greater than noise output). That more than a hundred times better than the 10bit resolution of most microcontroller analog to digital converters.
+*) The isolation amplifer provides approximately 17bits of resolution (maximum signal output is 2^17 times greater than noise output). That is more than a hundred times better than the 10bit resolution of most microcontroller analog to digital converters, one reason for chosing a 24-bit ADC.
 *) The active electrodes use the OPA121 for its extremely low current noise, as its inputs face a high-impedance connection to the user. The OPA211 offers lower voltage noise, and handles the low-impedance internal tasks.
 
 __ArduinoDAQ__
