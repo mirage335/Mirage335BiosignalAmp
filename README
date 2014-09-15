@@ -3,6 +3,8 @@ See the end of the file for license conditions.
 See license.txt for Mirage335BiosignalAmp license conditions.
 
 mirage335-site.dyndns.org
+mirage335.dyndns.org/wiki/Mirage335BiosignalAmp
+wiki.hacdc.org/index.php/Category:BiosignalAmplifier
 
 Intended to represent the best achievable biosignal amplifier with commercially available components and dry electrodes. Input referred thermal noise across a 50Hz bandwidth should be about one microvolt at worst. Common-mode rejection is subject to real world conditions, but should far exceed commercial units.
 
